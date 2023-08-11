@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# 执行 commitlint 命令
+npx --no-install commitlint -e $HUSKY_GIT_PARAMS
+
+# 捕获错误代码
+EXIT_CODE=$?
+
+# 检查错误代码
+if [ $EXIT_CODE -ne 0 ]; then
+  echo -e "\033[91;1m提交信息不符合规范，请修改后重新提交。\033[0m
+  
+    \033[92mfeat:\033[0m       🚀 新增功能
+    \033[92mfix:\033[0m        🧩 修复缺陷 
+    \033[92mdocs:\033[0m       📚 文档变更 
+    \033[92mperf:\033[0m       ⚡️ 性能优化
+    \033[92mstyle:\033[0m      🎨 代码格式
+    \033[92mtest:\033[0m       ✅ 添加疏漏测试或已有测试改动
+    \033[92mrefactor:\033[0m   ♻️  代码重构
+    \033[92mchore:\033[0m      📦️ 构建流程、外部依赖变更
+    \033[92mci:\033[0m         🎡 修改 CI 配置、脚本
+    \033[92mrevert:\033[0m     ⏪️ 回滚 commit
+"
+  # 在此处可以添加您的自定义错误处理逻辑
+  exit 1  # 退出脚本并返回一个非零错误代码
+fi
+
+# 在提交信息符合规范时继续后续操作
+# Add other commands here
