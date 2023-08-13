@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import StyledComponentsRegistry from "../lib/AntdRegistry";
 import { ConfigProvider } from "antd";
 import theme from "../theme/themeConfig";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,9 +24,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ConfigProvider theme={theme}>
-          <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
-        </ConfigProvider>
+        <Suspense fallback={<>加载中</>}>
+          <ConfigProvider theme={theme}>
+            <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+          </ConfigProvider>
+        </Suspense>
       </body>
     </html>
   );
